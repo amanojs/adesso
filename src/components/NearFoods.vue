@@ -5,7 +5,10 @@
       <div
         v-for="(item, i) in itemList"
         :key="i"
-        :class="(i + 1) % 4 === 0 ? 'right near_card' : 'near_card'"
+        :class="[
+          (i + 1) % 4 === 0 ? 'right near_card' : 'near_card',
+          (i + 1) % 2 === 0 ? 'mod' : '',
+        ]"
       >
         <img
           src="../assets/shops/8.jpg"
@@ -25,6 +28,7 @@
             <radar-chart
               height="180"
               :chart-data="datacollection"
+              :options="options"
             ></radar-chart>
           </div>
         </div>
@@ -47,6 +51,7 @@ export default {
   },
   data: () => ({
     datacollection: null,
+    options: null,
     itemList: [
       {
         id: 1,
@@ -81,6 +86,11 @@ export default {
   }),
   mounted() {
     this.fillData();
+    this.options = {
+      legend: {
+        display: false,
+      },
+    };
   },
   methods: {
     fillData() {
@@ -160,5 +170,38 @@ h2 {
 
 .right {
   margin-right: 0;
+}
+
+@media screen and (max-width: 1350px) and (min-width: 645px) {
+  .near_card {
+    width: 48.5%;
+    height: 580px;
+  }
+  .mod {
+    margin-right: 0;
+  }
+  @media screen and (max-width: 900px) {
+    .near_card {
+      height: 500px;
+    }
+  }
+}
+
+@media screen and (max-width: 645px) and (min-width: 401px) {
+  .near_card {
+    width: 100%;
+    height: 580px;
+    margin-bottom: 10px;
+    margin-right: 0px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .near_card {
+    width: 100%;
+    height: 500px;
+    margin-bottom: 10px;
+    margin-right: 0px;
+  }
 }
 </style>

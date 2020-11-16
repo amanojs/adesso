@@ -163,6 +163,12 @@ h2 {
   font-size: 15px;
 }
 
+@media screen and (min-width: 1100px) and (max-width: 1550px) {
+  .fav_card {
+    height: 580px;
+  }
+}
+
 @media screen and (max-width: 1100px) {
   .fav_list {
   }
@@ -180,6 +186,7 @@ h2 {
 @media screen and (min-width: 600px) and (max-width: 1100px) {
   .fav_card {
     height: 1100px;
+    margin-bottom: 50px;
   }
   .fav_card img {
     height: 500px;

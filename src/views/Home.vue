@@ -218,7 +218,7 @@ h2 {
   margin: 50px 0;
 }
 
-@media screen and (min-width: 1050px) and (max-width: 1500px) {
+@media screen and (min-width: 1050px) and (max-width: 1680px) {
   .features {
     flex-wrap: wrap;
     justify-content: center;
