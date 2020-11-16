@@ -117,6 +117,7 @@ h2 {
 }
 .fav_list {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   padding: 20px 0;
 }
@@ -134,6 +135,7 @@ h2 {
 }
 .category_box {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 10px;
 }
 .category {
@@ -159,5 +161,47 @@ h2 {
   justify-content: center;
   align-items: center;
   font-size: 15px;
+}
+
+@media screen and (max-width: 1100px) {
+  .fav_list {
+  }
+  .fav_card {
+    width: 100%;
+    height: 590px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 8px #e9e9e9;
+  }
+  .center {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1100px) {
+  .fav_card {
+    height: 1100px;
+  }
+  .fav_card img {
+    height: 500px;
+  }
+  @media screen and (min-width: 600px) and (max-width: 870px) {
+    .fav_card {
+      height: 950px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .fav_card {
+    height: 620px;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .fav_card {
+    height: 590px;
+    margin-bottom: 10px;
+  }
 }
 </style>

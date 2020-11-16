@@ -37,7 +37,7 @@
               half-increments
             ></v-rating>
           </div>
-          <div class="feature_item">
+          <div class="feature_item feature_center">
             <h3>接客</h3>
             <v-rating
               hover
@@ -216,5 +216,41 @@ h2 {
 }
 .feature_btn {
   margin: 50px 0;
+}
+
+@media screen and (min-width: 1050px) and (max-width: 1500px) {
+  .features {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .feature_item {
+    width: 20%;
+    margin-right: 6.8%;
+    margin-bottom: 40px;
+  }
+  .feature_center {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .features {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .feature_item {
+    width: 40%;
+    margin-right: 6.8%;
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .features {
+    display: block;
+  }
+  .feature_item {
+    width: 100%;
+  }
 }
 </style>

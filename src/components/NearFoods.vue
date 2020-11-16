@@ -8,7 +8,7 @@
         :class="(i + 1) % 4 === 0 ? 'right near_card' : 'near_card'"
       >
         <img
-          src="https://cdn.asagei.com/syokuraku/uploads/2019/01/20190204-koto01.jpg"
+          src="../assets/shops/8.jpg"
           width="100%"
           height="220px"
           style="object-fit: cover"
@@ -138,10 +138,12 @@ h2 {
 }
 .category_box {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 10px;
 }
 .category {
-  padding: 5px 17px;
+  padding: 3px 15px;
+  margin-top: 5px;
   margin-right: 4px;
   font-size: 11px;
   color: #fff;
