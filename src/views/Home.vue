@@ -3,13 +3,26 @@
     <div class="mainVisual">
       <div class="overlay"></div>
       <div class="search_body">
-        <v-text-field
-          name="name"
-          label="エリア・駅"
-          outlined
-          prepend-icon="mdi-docker"
-          id="id"
-        ></v-text-field>
+        <div class="area_tag_box">
+          <div class="area_box">
+            <v-text-field
+              name="name"
+              label="エリア・駅"
+              outlined
+              clearable
+              prepend-inner-icon="mdi-map-marker"
+            ></v-text-field>
+          </div>
+          <div class="tag_box">
+            <v-text-field
+              name="name"
+              label="タグ・店名"
+              outlined
+              clearable
+              prepend-inner-icon="mdi-tag"
+            ></v-text-field>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -111,9 +124,6 @@ export default {
 
 <style scoped>
 .mainVisual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 90vh;
   position: relative;
@@ -143,14 +153,28 @@ h2 {
   text-align: left;
 }
 .search_body {
-  width: 55%;
-  height: 65%;
+  display: flex;
+  position: absolute;
+  top: 70%;
+  left: 20%;
+  width: 60%;
   border-radius: 3px;
   background-color: #fff;
   box-shadow: 0 0 8px #444;
   z-index: 3;
-  padding: 4%;
+  padding: 2% 1% 1% 1%;
 }
+.area_tag_box {
+  display: flex;
+  width: 60%;
+}
+.area_box {
+  width: 50%;
+}
+.tag_box {
+  width: 50%;
+}
+
 .fav_list {
   display: flex;
   width: 100%;
