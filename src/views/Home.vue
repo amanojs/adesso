@@ -2,7 +2,15 @@
   <div class="home">
     <div class="mainVisual">
       <div class="overlay"></div>
-      <div class="search_body"></div>
+      <div class="search_body">
+        <v-text-field
+          name="name"
+          label="エリア・駅"
+          outlined
+          prepend-icon="mdi-docker"
+          id="id"
+        ></v-text-field>
+      </div>
     </div>
 
     <div class="wrap">
@@ -141,6 +149,7 @@ h2 {
   background-color: #fff;
   box-shadow: 0 0 8px #444;
   z-index: 3;
+  padding: 4%;
 }
 .fav_list {
   display: flex;

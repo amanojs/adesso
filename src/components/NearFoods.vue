@@ -11,7 +11,7 @@
         ]"
       >
         <img
-          src="../assets/shops/8.jpg"
+          src="../assets/shops/4.jpg"
           width="100%"
           height="220px"
           style="object-fit: cover"
@@ -54,31 +54,37 @@ export default {
     options: null,
     itemList: [
       {
-        id: 1,
-        name: "コロッケニシヤマ",
-        image: "",
+        id: 4,
+        name: "餃子のニシヤマ",
+        image: "../assets/shops/4.jpg",
         tag: ["コロッケ", "低価格", "揚げたて"],
         graph: [],
       },
       {
-        id: 1,
+        id: 5,
         name: "スシオー",
-        image: "",
+        image: "../assets/shops/5.jpg",
         tag: ["寿司", "リーズナブル"],
         graph: [],
       },
       {
-        id: 1,
+        id: 6,
         name: "サイゾリア",
-        image: "",
+        image: "../assets/shops/6.jpg",
         tag: ["イタリアン", "低価格", "多人数OK"],
         graph: [],
       },
-      { id: 1, name: "洋食屋さと", image: "", tag: ["食べ放題"], graph: [] },
       {
-        id: 1,
+        id: 7,
+        name: "洋食屋さと",
+        image: "../assets/shops/7.jpg",
+        tag: ["食べ放題"],
+        graph: [],
+      },
+      {
+        id: 8,
         name: "マクドナダル",
-        image: "",
+        image: "../assets/shops/8.jpg",
         tag: ["ハンバーガー", "スピーディー", "期間限定"],
         graph: [],
       },
