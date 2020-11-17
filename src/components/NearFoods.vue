@@ -90,6 +90,14 @@ export default {
       legend: {
         display: false,
       },
+      responsive: true,
+      scale: {
+        ticks: {
+          max: 5,
+          min: 0,
+          stepSize: 1,
+        },
+      },
     };
   },
   methods: {

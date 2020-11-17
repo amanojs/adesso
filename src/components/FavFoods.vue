@@ -17,9 +17,7 @@
             <div class="category">アットホーム</div>
             <div class="category">大盛無料</div>
           </div>
-          <div class="graph">
-            <line-chart height="180" :chart-data="datacollection"></line-chart>
-          </div>
+          <div class="graph"></div>
         </div>
       </div>
 
@@ -38,9 +36,7 @@
             <div class="category">アットホーム</div>
             <div class="category">限定10名様</div>
           </div>
-          <div class="graph">
-            <line-chart height="180" :chart-data="datacollection"></line-chart>
-          </div>
+          <div class="graph"></div>
         </div>
       </div>
 
@@ -58,9 +54,7 @@
             <div class="category">ラーメン</div>
             <div class="category">あっさり</div>
           </div>
-          <div class="graph">
-            <line-chart height="180" :chart-data="datacollection"></line-chart>
-          </div>
+          <div class="graph"></div>
         </div>
       </div>
     </div>
@@ -73,39 +67,10 @@
 </template>
 
 <script>
-import LineChart from "@/plugins/line.js";
 export default {
-  components: {
-    LineChart,
-  },
-  data: () => ({
-    datacollection: null,
-  }),
-  mounted() {
-    this.fillData();
-  },
-  methods: {
-    fillData() {
-      this.datacollection = {
-        labels: [this.getRandomInt(), this.getRandomInt()],
-        datasets: [
-          {
-            label: "Data One",
-            backgroundColor: "#f87979",
-            data: [this.getRandomInt(), this.getRandomInt()],
-          },
-          {
-            label: "Data One",
-            backgroundColor: "#f87979",
-            data: [this.getRandomInt(), this.getRandomInt()],
-          },
-        ],
-      };
-    },
-    getRandomInt() {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
-    },
-  },
+  data: () => ({}),
+  mounted() {},
+  methods: {},
 };
 </script>
 
