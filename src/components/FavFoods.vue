@@ -12,6 +12,7 @@
         />
         <div class="card_box">
           <h3>桒畑食堂</h3>
+          <p>宮崎県都城市</p>
           <div class="category_box">
             <div class="category">和食</div>
             <div class="category">アットホーム</div>
@@ -31,12 +32,16 @@
         />
         <div class="card_box">
           <h3>The Rich Kibun</h3>
+          <p>宮崎県日南市</p>
           <div class="category_box">
             <div class="category">洋食</div>
             <div class="category">アットホーム</div>
             <div class="category">限定10名様</div>
           </div>
-          <div class="graph"></div>
+          <div class="graph">
+            <v-card> 3.4 </v-card>
+            <v-card> 4.3 </v-card>
+          </div>
         </div>
       </div>
 
@@ -50,6 +55,7 @@
         />
         <div class="card_box">
           <h3>ラーメン食堂 ～ assari ～</h3>
+          <p>宮崎県えびの市</p>
           <div class="category_box">
             <div class="category">ラーメン</div>
             <div class="category">あっさり</div>
@@ -98,6 +104,12 @@ h2 {
 .fav_card h3 {
   text-align: left;
 }
+.fav_card p {
+  font-size: 13px;
+  color: #555;
+  text-align: left;
+  margin-bottom: 10px;
+}
 .category_box {
   display: flex;
   flex-wrap: wrap;
@@ -113,6 +125,8 @@ h2 {
   box-shadow: 0 0 8px #e5e5e5;
 }
 .graph {
+  display: flex;
+  align-items: flex-start;
   height: 230px;
   margin-top: 10px;
   /* border: 1px solid #eee; */

@@ -1,29 +1,18 @@
 <template>
-  <div class="home">
+  <v-app class="home">
     <div class="mainVisual">
       <div class="overlay"></div>
-      <div class="search_body">
-        <div class="area_tag_box">
-          <div class="area_box">
-            <v-text-field
-              name="name"
-              label="エリア・駅"
-              outlined
-              clearable
-              prepend-inner-icon="mdi-map-marker"
-            ></v-text-field>
-          </div>
-          <div class="tag_box">
-            <v-text-field
-              name="name"
-              label="タグ・店名"
-              outlined
-              clearable
-              prepend-inner-icon="mdi-tag"
-            ></v-text-field>
-          </div>
+      <div class="main_logo">
+        <figure>
+          <img src="../assets/adesso_white.png" alt="main_logo" />
+        </figure>
+        <div>
+          <p>
+            みんなで「今」をつくるグルメサイト<br />みんなで「今」をつくるグルメサイト<br />みんなで「今」をつくるグルメサイト
+          </p>
         </div>
       </div>
+      <SearchBox />
     </div>
 
     <div class="wrap">
@@ -41,7 +30,7 @@
               length="5"
               size="30"
               value="2.5"
-              background-color="white"
+              background-color="#909090"
               color="#f1c40f"
               half-increments
             ></v-rating>
@@ -53,7 +42,7 @@
               length="5"
               size="30"
               value="2.5"
-              background-color="white"
+              background-color="#909090"
               color="#f1c40f"
               half-increments
             ></v-rating>
@@ -65,7 +54,7 @@
               length="5"
               size="30"
               value="2.5"
-              background-color="white"
+              background-color="#909090"
               color="#f1c40f"
               half-increments
             ></v-rating>
@@ -77,7 +66,7 @@
               length="5"
               size="30"
               value="2.5"
-              background-color="white"
+              background-color="#909090"
               color="#f1c40f"
               half-increments
             ></v-rating>
@@ -89,7 +78,7 @@
               length="5"
               size="30"
               value="2.5"
-              background-color="white"
+              background-color="#909090"
               color="#f1c40f"
               half-increments
             ></v-rating>
@@ -105,19 +94,22 @@
 
       <NearFoods />
     </div>
-  </div>
+  </v-app>
 </template>
 
 <script>
 import NearFoods from "@/components/NearFoods";
 import FavFoods from "@/components/FavFoods";
+import SearchBox from "@/components/SearchBox";
 
 export default {
   components: {
     NearFoods,
     FavFoods,
+    SearchBox,
   },
-  name: "Home",
+
+  Appname: "Home",
 };
 </script>
 
@@ -140,6 +132,21 @@ export default {
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 2;
 }
+.main_logo {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 3;
+}
+.main_logo p {
+  margin-top: 20px;
+  color: white;
+  line-height: 0;
+  text-shadow: 0 0 5px #555;
+  font-size: 17px;
+}
 .wrap {
   width: 95%;
   height: auto;
@@ -151,28 +158,6 @@ h2 {
   font-size: 35px;
   font-weight: normal;
   text-align: left;
-}
-.search_body {
-  display: flex;
-  position: absolute;
-  top: 70%;
-  left: 20%;
-  width: 60%;
-  border-radius: 3px;
-  background-color: #fff;
-  box-shadow: 0 0 8px #444;
-  z-index: 3;
-  padding: 2% 1% 1% 1%;
-}
-.area_tag_box {
-  display: flex;
-  width: 60%;
-}
-.area_box {
-  width: 50%;
-}
-.tag_box {
-  width: 50%;
 }
 
 .fav_list {

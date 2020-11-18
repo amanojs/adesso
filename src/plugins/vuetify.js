@@ -13,8 +13,6 @@ export default new Vuetify({
     light: {
       background: colors.blue.accent2
     },
-    dark: {
-      background: colors.blue
-    }
+    dark: false
   }
 })

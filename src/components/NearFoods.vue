@@ -19,6 +19,7 @@
         />
         <div class="card_box">
           <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
           <div class="category_box">
             <div class="category" v-for="tag in item.tag" :key="tag">
               {{ tag }}
@@ -56,6 +57,7 @@ export default {
       {
         id: 4,
         name: "餃子のニシヤマ",
+        address: "愛知県名古屋市中村区",
         image: "../assets/shops/4.jpg",
         tag: ["コロッケ", "低価格", "揚げたて"],
         graph: [],
@@ -63,6 +65,7 @@ export default {
       {
         id: 5,
         name: "スシオー",
+        address: "愛知県名古屋市中村区",
         image: "../assets/shops/5.jpg",
         tag: ["寿司", "リーズナブル"],
         graph: [],
@@ -70,6 +73,7 @@ export default {
       {
         id: 6,
         name: "サイゾリア",
+        address: "愛知県名古屋市中村区",
         image: "../assets/shops/6.jpg",
         tag: ["イタリアン", "低価格", "多人数OK"],
         graph: [],
@@ -77,6 +81,7 @@ export default {
       {
         id: 7,
         name: "洋食屋さと",
+        address: "愛知県名古屋市中村区",
         image: "../assets/shops/7.jpg",
         tag: ["食べ放題"],
         graph: [],
@@ -84,6 +89,7 @@ export default {
       {
         id: 8,
         name: "マクドナダル",
+        address: "愛知県名古屋市中村区",
         image: "../assets/shops/8.jpg",
         tag: ["ハンバーガー", "スピーディー", "期間限定"],
         graph: [],
@@ -160,14 +166,20 @@ h2 {
   font-size: 15px;
   text-align: left;
 }
+.card_box p {
+  font-size: 13px;
+  color: #555;
+  text-align: left;
+  margin-bottom: 10px;
+}
 .category_box {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 .category {
   padding: 3px 15px;
-  margin-top: 5px;
+  margin-top: 0px;
   margin-right: 4px;
   font-size: 11px;
   color: #fff;
