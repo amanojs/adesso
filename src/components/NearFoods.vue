@@ -3,7 +3,7 @@
     <h2>近くの飲食店</h2>
     <div class="near_list">
       <div
-        v-for="(item, i) in itemList"
+        v-for="(item, i) in nearShops"
         :key="i"
         :class="[
           (i + 1) % 4 === 0 ? 'right near_card' : 'near_card',
@@ -11,26 +11,47 @@
         ]"
       >
         <img
-          src="../assets/shops/4.jpg"
+          v-if="item.image !== null"
+          :src="`http://localhost:9000/images/shops/${item.image}`"
           width="100%"
           height="220px"
           style="object-fit: cover"
           alt="fav_shop"
         />
+        <v-layout
+          style="width: 100%; height: 220px; background-color: #555"
+          v-else
+          justify-center
+          align-center
+        >
+          <v-icon x-large>mdi-image-off-outline</v-icon>
+        </v-layout>
         <div class="card_box">
-          <h3>{{ item.name }}</h3>
+          <h3>{{ item.shop_name }}</h3>
           <p>{{ item.address }}</p>
           <div class="category_box">
-            <div class="category" v-for="tag in item.tag" :key="tag">
+            <div class="category" v-for="tag in item.tags" :key="tag">
               {{ tag }}
             </div>
+            <div v-if="!item.tags" class="no-category">関連タグ無し</div>
           </div>
           <div class="graph">
             <radar-chart
+              v-if="item.graphData"
               height="180"
-              :chart-data="datacollection"
+              :chart-data="item.graphData"
               :options="options"
             ></radar-chart>
+            <div v-else>
+              <div>
+                <v-avatar class="mb-1" size="30" color="#999"
+                  ><v-icon size="15" color="#fff"
+                    >mdi-pencil-off-outline</v-icon
+                  ></v-avatar
+                >
+              </div>
+              <p>まだレビューが投稿されていません</p>
+            </div>
           </div>
         </div>
       </div>
@@ -45,59 +66,16 @@
 
 <script>
 import RadarChart from "@/plugins/charts/radar.js";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     RadarChart,
   },
   data: () => ({
-    datacollection: null,
     options: null,
-    itemList: [
-      {
-        id: 4,
-        name: "餃子のニシヤマ",
-        address: "愛知県名古屋市中村区",
-        image: "../assets/shops/4.jpg",
-        tag: ["コロッケ", "低価格", "揚げたて"],
-        graph: [],
-      },
-      {
-        id: 5,
-        name: "スシオー",
-        address: "愛知県名古屋市中村区",
-        image: "../assets/shops/5.jpg",
-        tag: ["寿司", "リーズナブル"],
-        graph: [],
-      },
-      {
-        id: 6,
-        name: "サイゾリア",
-        address: "愛知県名古屋市中村区",
-        image: "../assets/shops/6.jpg",
-        tag: ["イタリアン", "低価格", "多人数OK"],
-        graph: [],
-      },
-      {
-        id: 7,
-        name: "洋食屋さと",
-        address: "愛知県名古屋市中村区",
-        image: "../assets/shops/7.jpg",
-        tag: ["食べ放題"],
-        graph: [],
-      },
-      {
-        id: 8,
-        name: "マクドナダル",
-        address: "愛知県名古屋市中村区",
-        image: "../assets/shops/8.jpg",
-        tag: ["ハンバーガー", "スピーディー", "期間限定"],
-        graph: [],
-      },
-    ],
   }),
-  mounted() {
-    this.fillData();
+  async mounted() {
     this.options = {
       legend: {
         display: false,
@@ -111,29 +89,16 @@ export default {
         },
       },
     };
+    await this.getNearShops();
   },
   methods: {
-    fillData() {
-      this.datacollection = {
-        labels: ["おいしさ", "値段", "接客", "雰囲気", "速さ"],
-        datasets: [
-          {
-            label: "評価",
-            backgroundColor: "rgba(230,126,34,0.6)",
-            data: [
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-            ],
-          },
-        ],
-      };
+    ...mapActions(["getNearShops"]),
+  },
+  computed: {
+    tagSplit: (tags) => {
+      return console.log(tags), tags !== null ? tags.split(",") : [];
     },
-    getRandomInt() {
-      return Math.floor(Math.random() * (5 + 1));
-    },
+    ...mapGetters(["nearShops"]),
   },
 };
 </script>
@@ -187,10 +152,22 @@ h2 {
   border-radius: 30px;
   box-shadow: 0 0 8px #e5e5e5;
 }
+.no-category {
+  padding: 3px 15px;
+  margin-top: 0px;
+  margin-right: 4px;
+  font-size: 11px;
+  color: #fff;
+  background-color: #666;
+  border-radius: 2px;
+  box-shadow: 0 0 8px #e5e5e5;
+}
 .graph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 180px;
-  margin-top: 10px;
   /* border: 1px solid #eee; */
 }
 
