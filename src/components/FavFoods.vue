@@ -2,65 +2,44 @@
   <div class="favorite">
     <h2>人気急上昇中</h2>
     <div class="fav_list">
-      <div class="fav_card">
+      <div
+        :class="i === 1 ? 'fav_card center' : 'fav_card'"
+        v-for="(shop, i) in favShops"
+        :key="shop"
+      >
         <img
-          src="https://cdn.asagei.com/syokuraku/uploads/2019/01/20190204-koto01.jpg"
+          v-if="shop.image !== null"
+          :src="`http://localhost:9000/images/shops/${shop.image}`"
           width="100%"
           height="300px"
           style="object-fit: cover"
           alt="fav_shop"
         />
+        <v-layout
+          style="width: 100%; height: 300px; background-color: #555"
+          v-else
+          justify-center
+          align-center
+        >
+          <v-icon x-large>mdi-image-off-outline</v-icon>
+        </v-layout>
         <div class="card_box">
-          <h3>桒畑食堂</h3>
-          <p>宮崎県都城市</p>
-          <div class="category_box">
-            <div class="category">和食</div>
-            <div class="category">アットホーム</div>
-            <div class="category">大盛無料</div>
-          </div>
-          <div class="graph"></div>
-        </div>
-      </div>
-
-      <div class="fav_card center">
-        <img
-          src="https://fujimi-ts.org/www2018/wp-content/uploads/img_jig_life_01-1.png"
-          width="100%"
-          height="300px"
-          style="object-fit: cover"
-          alt="fav_shop"
-        />
-        <div class="card_box">
-          <h3>The Rich Kibun</h3>
-          <p>宮崎県日南市</p>
-          <div class="category_box">
-            <div class="category">洋食</div>
-            <div class="category">アットホーム</div>
-            <div class="category">限定10名様</div>
-          </div>
+          <h3>{{ shop.shop_name }}</h3>
+          <p>{{ shop.address }}</p>
           <div class="graph">
-            <v-card> 3.4 </v-card>
-            <v-card> 4.3 </v-card>
+            <p>
+              平均総合評価:
+              <span>{{ String(shop.sumall).padEnd(4, ".0") }}</span> / 25.0
+            </p>
           </div>
-        </div>
-      </div>
-
-      <div class="fav_card">
-        <img
-          src="https://image.hitosara.com/gg/image/0006118824/0006118824F8_551x413y.jpg"
-          width="100%"
-          height="300px"
-          style="object-fit: cover"
-          alt="fav_shop"
-        />
-        <div class="card_box">
-          <h3>ラーメン食堂 ～ assari ～</h3>
-          <p>宮崎県えびの市</p>
-          <div class="category_box">
-            <div class="category">ラーメン</div>
-            <div class="category">あっさり</div>
+          <div class="review">
+            <v-avatar color="#888" rounded
+              ><v-icon color="white">mdi-account</v-icon></v-avatar
+            >
+            <p>
+              たかあかたふぁふぁｓｆふぁあ椅子今後就職たかあかたふぁふぁｓｆふぁあ椅子今後就職たかあかたふぁふぁｓｆふぁあ椅子今後就職たかあかたふぁふぁｓｆふぁあ椅子今後就職
+            </p>
           </div>
-          <div class="graph"></div>
         </div>
       </div>
     </div>
@@ -73,10 +52,20 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   data: () => ({}),
-  mounted() {},
-  methods: {},
+  async mounted() {
+    await this.getFavShops();
+    console.log(this.favShops);
+  },
+  methods: {
+    ...mapActions(["getFavShops"]),
+  },
+  computed: {
+    ...mapGetters(["favShops"]),
+  },
 };
 </script>
 
@@ -94,7 +83,7 @@ h2 {
 }
 .fav_card {
   width: 30%;
-  height: 670px;
+  height: auto;
   box-shadow: 0 0 8px #e9e9e9;
 }
 .card_box {
@@ -127,10 +116,39 @@ h2 {
 .graph {
   display: flex;
   align-items: flex-start;
-  height: 230px;
+  height: 60px;
   margin-top: 10px;
   /* border: 1px solid #eee; */
 }
+.graph p {
+  font-weight: bold;
+}
+.graph span {
+  font-size: 20px;
+  color: #f1c40f;
+  text-shadow: 0 0 1px #999;
+}
+
+.review {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: 70px;
+  box-shadow: 0 0 8px #e9e9e9;
+  padding: 10px;
+}
+.review p {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 90%;
+  height: 45px;
+  padding: 0px 0 0 10px;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .center {
   margin: 0 5%;
 }
