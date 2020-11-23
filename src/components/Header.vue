@@ -2,7 +2,9 @@
   <div class="header">
     <div class="wrap">
       <div class="logo">
-        <a to="/"><img src="../assets/adesso.png" width="100%" alt="logo" /></a>
+        <router-link to="/"
+          ><img src="../assets/adesso.png" width="100%" alt="logo"
+        /></router-link>
       </div>
       <div class="member_reg">
         <v-btn outlined>会員登録</v-btn>

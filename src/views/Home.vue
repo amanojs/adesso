@@ -12,7 +12,9 @@
           </p>
         </div>
       </div>
-      <SearchBox />
+      <div class="searchbox">
+        <SearchBox />
+      </div>
     </div>
 
     <div class="wrap">
@@ -131,6 +133,13 @@ export default {
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 2;
+}
+.searchbox {
+  width: 70%;
+  position: absolute;
+  top: 60%;
+  left: 15%;
+  z-index: 3;
 }
 .main_logo {
   position: absolute;
