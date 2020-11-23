@@ -1,72 +1,64 @@
 <template>
-  <div class="nearFoods">
-    <h2>近くの飲食店</h2>
-    <div class="near_list">
-      <div
-        v-for="(item, i) in nearShops"
-        :key="i"
-        :class="[
-          (i + 1) % 4 === 0 ? 'right near_card' : 'near_card',
-          (i + 1) % 2 === 0 ? 'mod' : '',
-        ]"
+  <div class="near_list">
+    <div
+      v-for="(item, i) in searchShops"
+      :key="i"
+      :class="[
+        (i + 1) % 4 === 0 ? 'right near_card' : 'near_card',
+        (i + 1) % 2 === 0 ? 'mod' : '',
+      ]"
+    >
+      <img
+        v-if="item.image !== null"
+        :src="`http://localhost:9000/images/shops/${item.image}`"
+        width="100%"
+        height="220px"
+        style="object-fit: cover"
+        alt="fav_shop"
+      />
+      <v-layout
+        style="width: 100%; height: 220px; background-color: #555"
+        v-else
+        justify-center
+        align-center
       >
-        <img
-          v-if="item.image !== null"
-          :src="`http://localhost:9000/images/shops/${item.image}`"
-          width="100%"
-          height="220px"
-          style="object-fit: cover"
-          alt="fav_shop"
-        />
-        <v-layout
-          style="width: 100%; height: 220px; background-color: #555"
-          v-else
-          justify-center
-          align-center
-        >
-          <v-icon x-large>mdi-image-off-outline</v-icon>
-        </v-layout>
-        <div class="card_box">
-          <h3>{{ item.shop_name }}</h3>
-          <p>{{ item.address }}</p>
-          <div class="category_box">
-            <div class="category" v-for="tag in item.tags" :key="tag">
-              {{ tag }}
-            </div>
-            <div v-if="!item.tags" class="no-category">関連タグ無し</div>
+        <v-icon x-large>mdi-image-off-outline</v-icon>
+      </v-layout>
+      <div class="card_box">
+        <h3>{{ item.shop_name }}</h3>
+        <p>{{ item.address }}</p>
+        <div class="category_box">
+          <div class="category" v-for="tag in item.tags" :key="tag">
+            {{ tag }}
           </div>
-          <div class="graph">
-            <radar-chart
-              v-if="item.graphData"
-              height="180"
-              :chart-data="item.graphData"
-              :options="options"
-            ></radar-chart>
-            <div v-else>
-              <div>
-                <v-avatar class="mb-1" size="30" color="#999"
-                  ><v-icon size="15" color="#fff"
-                    >mdi-pencil-off-outline</v-icon
-                  ></v-avatar
-                >
-              </div>
-              <p>まだレビューが投稿されていません</p>
+          <div v-if="!item.tags" class="no-category">関連タグ無し</div>
+        </div>
+        <div class="graph">
+          <radar-chart
+            v-if="item.graphData"
+            height="180"
+            :chart-data="item.graphData"
+            :options="options"
+          ></radar-chart>
+          <div v-else>
+            <div>
+              <v-avatar class="mb-1" size="30" color="#999"
+                ><v-icon size="15" color="#fff"
+                  >mdi-pencil-off-outline</v-icon
+                ></v-avatar
+              >
             </div>
+            <p>まだレビューが投稿されていません</p>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="fav_more">
-      <v-icon>mdi-arrow-down-drop-circle</v-icon>
-      もっと見る
     </div>
   </div>
 </template>
 
 <script>
 import RadarChart from "@/plugins/charts/radar.js";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -87,33 +79,25 @@ export default {
       },
     },
   }),
-  async mounted() {
-    await this.getNearShops();
+  mounted() {
+    console.log(this.searchShops);
   },
-  methods: {
-    ...mapActions(["getNearShops"]),
-  },
+  methods: {},
   computed: {
     tagSplit: (tags) => {
       return console.log(tags), tags !== null ? tags.split(",") : [];
     },
-    ...mapGetters(["nearShops"]),
+    ...mapGetters(["searchShops"]),
   },
 };
 </script>
 
 <style scoped>
-h2 {
-  font-size: 35px;
-  font-weight: normal;
-  text-align: left;
-}
-
 .near_list {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  padding: 20px 0;
+  margin-top: 20px;
 }
 .near_card {
   width: 23%;

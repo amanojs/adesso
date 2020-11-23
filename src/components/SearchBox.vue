@@ -1,10 +1,11 @@
 <template>
-  <div class="search_body">
+  <form @submit.prevent="search" class="search_body">
     <div class="area_tag_box">
       <div class="area_box">
         <v-text-field
           placeholder="東京都千代田区"
           label="エリア"
+          v-model="formData.area"
           outlined
           clearable
           prepend-inner-icon="mdi-map-marker"
@@ -16,6 +17,7 @@
           placeholder="居酒屋,子供"
           hint="複数の場合はカンマで区切ってください"
           label="タグ・店名"
+          v-model="formData.tags"
           outlined
           clearable
           prepend-inner-icon="mdi-tag"
@@ -55,17 +57,23 @@
       </div>
     </div>
     <div class="search_btn_box">
-      <v-btn tile color="#E57E22" class="search_btn" @click="test">
+      <v-btn tile color="#E57E22" class="search_btn" type="submit">
         <v-icon left> mdi-magnify </v-icon>
         検索
       </v-btn>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions } from "vuex";
+
 export default {
   data: () => ({
+    formData: {
+      area: "",
+      tags: "",
+    },
     nop: 20,
     nops: [],
     dates: [],
@@ -73,8 +81,15 @@ export default {
   }),
   mounted() {
     this.generateForm();
+    this.formData.area = String(this.area);
+    this.formData.tags = String(this.tags);
   },
   methods: {
+    search() {
+      this.updateSearchForm(this.formData);
+      this.$router.push("/search");
+      return this.searchShops();
+    },
     generateForm() {
       const days = ["日", "月", "火", "水", "木", "金", "土"];
       const now = new Date();
@@ -105,6 +120,13 @@ export default {
         time.setMinutes(time.getMinutes() + 30);
       }
     },
+    ...mapMutations({
+      updateSearchForm: "updateSearchForm",
+    }),
+    ...mapActions(["searchShops"]),
+  },
+  computed: {
+    ...mapGetters(["area", "tags"]),
   },
 };
 </script>
@@ -113,13 +135,10 @@ export default {
 .search_body {
   display: flex;
   flex-wrap: wrap;
-  position: absolute;
-  top: 60%;
-  left: 15%;
-  width: 70%;
+  width: 100%;
   border-radius: 3px;
   background-color: #fff;
-  box-shadow: 0 0 8px #444;
+  /* box-shadow: 0 0 8px #999; */
   z-index: 3;
   padding: 2% 1% 2% 1%;
 }
