@@ -10,7 +10,7 @@ export default new Vuex.Store({
     nearShops: [],
     searchShops: [],
     searchForm: {
-      area: "愛知県名古屋市",
+      area: "",
       tags: ""
     }
   },

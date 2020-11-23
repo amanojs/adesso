@@ -83,6 +83,7 @@
           <line-chart
             height="180"
             :chart-data="shopInfo.rateByMonth"
+            :options="lineOptions"
           ></line-chart>
         </div>
         <div class="shop_info">
@@ -132,6 +133,45 @@ export default {
           min: 0,
           stepSize: 1,
         },
+      },
+    },
+    lineOptions: {
+      responsive: true,
+      legend: {
+        align: "start",
+        position: "right",
+        labels: {
+          padding: 15,
+        },
+      },
+      scales: {
+        xAxes: [
+          {
+            // 軸線を表示しない
+            gridLines: {
+              display: false,
+            },
+            // 目盛り
+            ticks: {
+              fontColor: "#333",
+            },
+          },
+        ],
+        // Y 軸
+        yAxes: [
+          {
+            gridLines: {
+              color: "#f3f3f3",
+              zeroLineColor: "#ddd",
+            },
+            ticks: {
+              fontColor: "#333",
+              min: 0,
+              max: 5,
+              stepSize: 1,
+            },
+          },
+        ],
       },
     },
   }),
