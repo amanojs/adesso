@@ -7,40 +7,42 @@
         v-for="(shop, i) in favShops"
         :key="shop"
       >
-        <img
-          v-if="shop.image !== null"
-          :src="`http://localhost:9000/images/shops/${shop.image}`"
-          width="100%"
-          height="300px"
-          style="object-fit: cover"
-          alt="fav_shop"
-        />
-        <v-layout
-          style="width: 100%; height: 300px; background-color: #555"
-          v-else
-          justify-center
-          align-center
-        >
-          <v-icon x-large>mdi-image-off-outline</v-icon>
-        </v-layout>
-        <div class="card_box">
-          <h3>{{ shop.shop_name }}</h3>
-          <p>{{ shop.address }}</p>
-          <div class="graph">
-            <p>
-              平均総合評価:
-              <span>{{ String(shop.sumall).padEnd(4, ".0") }}</span> / 25.0
-            </p>
+        <router-link :to="`/about?id=${shop.shop_id}`">
+          <img
+            v-if="shop.image !== null"
+            :src="`http://localhost:9000/images/shops/${shop.image}`"
+            width="100%"
+            height="300px"
+            style="object-fit: cover"
+            alt="fav_shop"
+          />
+          <v-layout
+            style="width: 100%; height: 300px; background-color: #555"
+            v-else
+            justify-center
+            align-center
+          >
+            <v-icon x-large>mdi-image-off-outline</v-icon>
+          </v-layout>
+          <div class="card_box">
+            <h3>{{ shop.shop_name }}</h3>
+            <p>{{ shop.address }}</p>
+            <div class="graph">
+              <p>
+                平均総合評価:
+                <span>{{ String(shop.sumall).padEnd(4, ".0") }}</span> / 25.0
+              </p>
+            </div>
+            <div class="review">
+              <v-avatar color="#888" rounded
+                ><v-icon color="white">mdi-account</v-icon></v-avatar
+              >
+              <p>
+                たかあかたふぁふぁｓｆふぁあ椅子今後就職たかあかたふぁふぁｓｆふぁあ椅子今後就職たかあかたふぁふぁｓｆふぁあ椅子今後就職たかあかたふぁふぁｓｆふぁあ椅子今後就職
+              </p>
+            </div>
           </div>
-          <div class="review">
-            <v-avatar color="#888" rounded
-              ><v-icon color="white">mdi-account</v-icon></v-avatar
-            >
-            <p>
-              たかあかたふぁふぁｓｆふぁあ椅子今後就職たかあかたふぁふぁｓｆふぁあ椅子今後就職たかあかたふぁふぁｓｆふぁあ椅子今後就職たかあかたふぁふぁｓｆふぁあ椅子今後就職
-            </p>
-          </div>
-        </div>
+        </router-link>
       </div>
     </div>
 

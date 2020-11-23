@@ -10,50 +10,52 @@
           (i + 1) % 2 === 0 ? 'mod' : '',
         ]"
       >
-        <img
-          v-if="item.image !== null"
-          :src="`http://localhost:9000/images/shops/${item.image}`"
-          width="100%"
-          height="220px"
-          style="object-fit: cover"
-          alt="fav_shop"
-        />
-        <v-layout
-          style="width: 100%; height: 220px; background-color: #555"
-          v-else
-          justify-center
-          align-center
-        >
-          <v-icon x-large>mdi-image-off-outline</v-icon>
-        </v-layout>
-        <div class="card_box">
-          <h3>{{ item.shop_name }}</h3>
-          <p>{{ item.address }}</p>
-          <div class="category_box">
-            <div class="category" v-for="tag in item.tags" :key="tag">
-              {{ tag }}
-            </div>
-            <div v-if="!item.tags" class="no-category">関連タグ無し</div>
-          </div>
-          <div class="graph">
-            <radar-chart
-              v-if="item.graphData"
-              height="180"
-              :chart-data="item.graphData"
-              :options="options"
-            ></radar-chart>
-            <div v-else>
-              <div>
-                <v-avatar class="mb-1" size="30" color="#999"
-                  ><v-icon size="15" color="#fff"
-                    >mdi-pencil-off-outline</v-icon
-                  ></v-avatar
-                >
+        <router-link :to="`/about?id=${item.shop_id}`">
+          <img
+            v-if="item.image !== null"
+            :src="`http://localhost:9000/images/shops/${item.image}`"
+            width="100%"
+            height="220px"
+            style="object-fit: cover"
+            alt="fav_shop"
+          />
+          <v-layout
+            style="width: 100%; height: 220px; background-color: #555"
+            v-else
+            justify-center
+            align-center
+          >
+            <v-icon x-large>mdi-image-off-outline</v-icon>
+          </v-layout>
+          <div class="card_box">
+            <h3>{{ item.shop_name }}</h3>
+            <p>{{ item.address }}</p>
+            <div class="category_box">
+              <div class="category" v-for="tag in item.tags" :key="tag">
+                {{ tag }}
               </div>
-              <p>まだレビューが投稿されていません</p>
+              <div v-if="!item.tags" class="no-category">関連タグ無し</div>
+            </div>
+            <div class="graph">
+              <radar-chart
+                v-if="item.graphData"
+                height="180"
+                :chart-data="item.graphData"
+                :options="options"
+              ></radar-chart>
+              <div v-else>
+                <div>
+                  <v-avatar class="mb-1" size="30" color="#999"
+                    ><v-icon size="15" color="#fff"
+                      >mdi-pencil-off-outline</v-icon
+                    ></v-avatar
+                  >
+                </div>
+                <p>まだレビューが投稿されていません</p>
+              </div>
             </div>
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
 

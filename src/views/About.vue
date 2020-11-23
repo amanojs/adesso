@@ -28,9 +28,11 @@
     <div>
       <v-img
         class="mt-2"
+        v-if="shopInfo.image"
         :src="`http://localhost:9000/images/shops/${shopInfo.image}`"
         height="500px"
       ></v-img>
+      <div v-else class="mt-10"></div>
     </div>
     <div class="img_box">
       <img width="150px" height="150px" src="../assets/shops/4.jpg" />
@@ -72,14 +74,16 @@
         </div>
       </div>
       <div class="graph_info_wrap">
-        <div class="radar">
+        <div class="radar mb-10">
+          <h3>特徴ごとの評価</h3>
           <radar-chart
             height="180"
             :chart-data="shopInfo.graphData"
             :options="options"
           ></radar-chart>
         </div>
-        <div class="line">
+        <div class="line mb-10">
+          <h3>月ごとの特徴評価推移</h3>
           <line-chart
             height="180"
             :chart-data="shopInfo.rateByMonth"
@@ -168,7 +172,7 @@ export default {
               fontColor: "#333",
               min: 0,
               max: 5,
-              stepSize: 1,
+              stepSize: 0.5,
             },
           },
         ],
@@ -176,15 +180,18 @@ export default {
     },
   }),
   async mounted() {
-    await this.getShop();
-    await this.getReview();
+    const url = window.location.hash;
+    const paramI = url.indexOf("id=");
+    const id = url.substring(paramI + 3, paramI + 4);
+    await this.getShop(id);
+    await this.getReview(id);
   },
   methods: {
-    async getShop() {
+    async getShop(id) {
       const { data } = await axios.get(
         "http://localhost:9000/api/shops/getShop",
         {
-          params: { shopId: 5 },
+          params: { shopId: id },
         }
       );
 
@@ -213,11 +220,11 @@ export default {
       //時間軸Line生成
       const labels = [];
       const features = [
-        { key: "taste", val: "味" },
-        { key: "price", val: "価格" },
-        { key: "service", val: "接客" },
-        { key: "atmosphere", val: "雰囲気" },
-        { key: "speed", val: "速さ" },
+        { key: "taste", val: "味", color: "#f39c12" },
+        { key: "price", val: "価格", color: "#e74c3c" },
+        { key: "service", val: "接客", color: "#2ecc71" },
+        { key: "atmosphere", val: "雰囲気", color: "#16a085" },
+        { key: "speed", val: "速さ", color: "#3498db" },
       ];
       const lineDatas = [];
       if (data.rateByMonth.length !== 0) {
@@ -231,7 +238,8 @@ export default {
           }
           lineDatas.push({
             label: features[i].val,
-            backgroundColor: "rgba(230,126,34,0.4)",
+            fill: false,
+            borderColor: features[i].color,
             data: lineData,
           });
         }
@@ -246,11 +254,11 @@ export default {
       this.shopInfo = data;
       console.log(this.shopInfo);
     },
-    async getReview() {
+    async getReview(id) {
       const { data } = await axios.get(
         "http://localhost:9000/api/shops/getReview",
         {
-          params: { shopId: 5 },
+          params: { shopId: id },
         }
       );
       this.review = data;
@@ -279,6 +287,7 @@ export default {
   flex-wrap: wrap;
   width: 55%;
   padding: 20px 0;
+  box-sizing: border-box;
   border-bottom: 1px solid #333;
 }
 .shop_name h2 {
@@ -421,7 +430,19 @@ export default {
 }
 
 .graph_info_wrap {
-  width: 44%;
+  width: 39%;
+}
+
+.radar h3,
+.line h3 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 20px 0;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #999;
 }
 
 .shop_info {

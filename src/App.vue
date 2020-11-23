@@ -24,6 +24,13 @@ export default {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+a h3 {
+  color: #222;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
